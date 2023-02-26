@@ -37,6 +37,14 @@ pipeline {
                                bat 'mvn test'
                            }
                        }
+     stage('SonarQube Analysis') {
+
+                      steps{
+                      bat 'mvn clean verify sonar:sonar \
+                             -Dsonar.projectKey=miniP \
+                             -Dsonar.host.url=http://localhost:9000 \
+                             -Dsonar.login=sqp_b355d21a6160d80317cb747e2f29dcefd318f7fb'
+                      }
 
 
 
