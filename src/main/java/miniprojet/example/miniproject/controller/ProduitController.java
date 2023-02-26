@@ -1,12 +1,11 @@
 package miniprojet.example.miniproject.controller;
 
-import miniprojet.example.miniproject.entity.ProduitEntity;
+import miniprojet.example.miniproject.entity.Produit;
 import miniprojet.example.miniproject.service.ProduitService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/produit")
@@ -15,50 +14,30 @@ public class ProduitController {
 
     private final ProduitService produitService;
 
+    @Autowired
     public ProduitController(ProduitService produitService) {
-        this.produitService = produitService;
+        this.produitService= produitService;
     }
-
-
-    @GetMapping("/getAllProduct")
-    @ResponseBody
-    public List<ProduitEntity> finAllProduct()
-    {
-        return produitService.findAllProduit();
+    @GetMapping(path = "/getProduit")
+    public List<Produit> getAllConsumers(){
+        return produitService.getAllListProduit();
     }
-
-
-    @GetMapping("/findProduitById/{id}")
-    @ResponseBody
-    public Optional<ProduitEntity> findProductById(@PathVariable("id")Long id)
-    {
+    @GetMapping("/{id}")
+    public Produit findProduitById(@PathVariable("id") Long id) {
         return produitService.findById(id);
-
     }
-
-    @PostMapping("/{id}")
-    public ProduitEntity saveProduct(@RequestBody ProduitEntity produitEntity,@PathVariable Long id){
-
-
-        return produitService.saveProduit(produitEntity,id); }
-
-
-    @PutMapping ("/updateProduct/{id}")
-    @ResponseBody
-    public ProduitEntity updateProduct(@RequestBody ProduitEntity produitEntity ){
-
-        LocalDate date =LocalDate.now();
-        produitEntity.setDateDeModification(date);
-        return produitService.updateProduit(produitEntity);
+    @PostMapping("/saveProduit/{id}")
+    public Produit save(@RequestBody  Produit produit ,@PathVariable long id){
+        return produitService.create(produit , id);
     }
-
-    @DeleteMapping("delete/{id}")
-    public void deleteProduct (@PathVariable("id") Long id)
-    {
-        produitService.deleteProduit(id);
+    @PutMapping("/updateProduit/{id}")
+    public Produit updateProduit(@RequestBody Produit produit , @PathVariable long id) {
+        return produitService.update(produit , id);
     }
-
-
+    @DeleteMapping("/delete{id}")
+    public void deleteProduit(@PathVariable("id") Long id) {
+        produitService.delete(id);
+    }
 
 
 }

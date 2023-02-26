@@ -1,6 +1,6 @@
 package miniprojet.example.miniproject.dto;
 
-import miniprojet.example.miniproject.entity.CategorieEntity;
+import miniprojet.example.miniproject.entity.Categories;
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,11 +11,11 @@ import java.time.LocalDate;
 public class ProduitDto {
     private long id;
 
-    private String Nom;
+    private String nom;
 
-    private int Qte;
+    private int qte;
 
-    private Boolean Disponible;
+    private Boolean disponible;
 
     private LocalDate dateDeCreation;
 
@@ -23,5 +23,5 @@ public class ProduitDto {
 
 
 
-    CategorieEntity categorieEntity;
+    Categories categorieEntity;
 }

@@ -1,7 +1,7 @@
 package miniprojet.example.miniproject.dto;
 
-import miniprojet.example.miniproject.entity.CategorieEntity;
-import miniprojet.example.miniproject.entity.ProduitEntity;
+
+import miniprojet.example.miniproject.entity.Produit;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,16 +24,7 @@ public class CategorieDto  {
     private LocalDate dateDeModification;
 
 
-    private List<ProduitEntity> produitEntities;
+    private List<Produit> produitEntities;
 
-    public static   CategorieDto toDto(CategorieEntity entity){
-        return  CategorieDto.builder()
-                .id(entity.getId())
-                .name(entity.getNom())
-                .qte(entity.getQte())
-                .dateDeCreation(entity.getDateDeCreation())
-                .dateDeModification(entity.getDateDeModification())
-                .build();
-    }
 
 }
